@@ -1,9 +1,9 @@
 #include"ohama.h"
 int face(int card) {
-	return card % 13; 
+	return card / 4; 
 }
 int suit(int card) {
-	return card / 13; 
+	return card % 4; 
 }
 int displayMenu() {
 	int mode;
@@ -36,10 +36,13 @@ void printCardsShuffling(int deck[], string suits[], string faces[]) {
 		if (i % 4 == 0) {
 			cout << endl;
 		}
-		cout <<"(" << faces[face(deck[i])] << "," << suits[suit(deck[i])] << ")    ";
+		cout << "(" << faces[face(deck[i])] << "," << suits[suit(deck[i])] << ")    ";
 
 	}
-}bool isFourOfAKind(int* hand, int size) {
+}
+int *createHandTest(int *deck, int *a) {
+}
+bool isFourOfAKind(int* hand, int size) {
 	int faceCount[FACES];
 	for (int i = 0; i < FACES; i++) {
 		faceCount[i] = 0; 
@@ -53,24 +56,25 @@ void printCardsShuffling(int deck[], string suits[], string faces[]) {
 }
 bool isFullHouse(int* hand, int size) {
 	int faceCount[FACES];
-	for (int i = 0; i < FACES; i++) {
+	for (int i = 0; i < FACES; i++) 
 		faceCount[i] = 0;
-	}
 	bool pair = false, toak = false;
+	for (int i = 0; i < size; i++)
+		faceCount[face(hand[i])]++; 
 	for (int i = 0; i < FACES; i++) {
 		if (faceCount[i] == 2)
 			pair = true;
-		else if (faceCount[i] == 3)
+		if (faceCount[i] == 3)
 			toak = true; 
 	}
-	return pair && toak; 
+	return (pair && toak); 
 }
 bool isFlush(int* hand, int size) {
 	int suitCount[SUITS]; 
 	for (int i = 0; i < SUITS; i++)
 		suitCount[i] = 0 ;
 	for (int i = 0; i < size; i++)
-		if (++suitCount[suit(hand[i])] == 4)
+		if (++suitCount[suit(hand[i])] == 5)
 			return true; 
 	return false; 
 }
@@ -83,19 +87,19 @@ bool isStraight(int* hand, int size) {
 		faceCount[face(hand[i])]++;
 	}
 	int cnt = 0; 
-	for (int i = 1; i < FACES; i++) {
+	for (int i = 0; i < FACES; i++) {
 		if (faceCount[i] == 0) 
 			cnt = 0;
-		cnt++; 
+		else cnt++; 
 		if (cnt == 5) 
 			return true; 
 	}
 	return false; 
 }
-bool isStraightFlush(int* hand, int size) {
-	int size = 5; 
-	for (int i = 0; i < size - 5 + 1; i++)
-		if (isStraight(hand + i, size) && isFlush(hand + i, size))
+bool isStraightFlush(int* hand, int size) { 
+	int straightSize = 5;
+	for (int i = 0; i < size - straightSize + 1; i++)
+		if (isStraight(hand + i, straightSize) && isFlush(hand + i, straightSize))
 			return true; 
 	return false; 
 }
@@ -140,9 +144,9 @@ bool isPairs(int* hand, int size) {
 	return false; 
 }
 int highestCard(int* hand, int size) {
-	int maxx = 0; 
+	int maxx = 1; 
 	for (int i = 0; i < size; i++) {
 		maxx = (face(hand[i]) > maxx) ? face(hand[i]) : maxx; 
 	}
-	return maxx;
+	return maxx + 1;
 }

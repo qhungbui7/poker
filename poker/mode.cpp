@@ -9,31 +9,34 @@ int* dealingForHand(int *deck, int *top, int size) { // a little bit change in p
 void printHand(int *hand, int size, string faces[FACES], string suits[SUITS]) { // a little bit change in parameter for reusing later
 	cout << "Your hand : "; 
 	for (int i = 0; i < size; i++) {
-		cout << "(" << faces[hand[i] % 13] << "," << suits[hand[i] / 13] << ")    ";
+		cout << "(" << faces[face(hand[i])] << "," << suits[suit(hand[i])] << ")    ";
 	}
 }
 void printHandRanking(int* hand, int size) {
-	cout << "Your hand rankings : "; 
-	if (isStraightFlush(hand, size)) {
+	cout <<endl << "Your hand rankings : "; 
+	if (isStraightFlush(hand, size)) 
 		cout << "Straigt Flush";
-		return; 
-	}
-	if (isFourOfAKind(hand, size)) {
+	else if (isFourOfAKind(hand, size)) 
 		cout << "Four of A Kind";
-		return;
-	}
-	if (isStraightFlush(hand, size)) {
+	else if (isStraightFlush(hand, size))
 		cout << "Straigt Flush";
-		return;
-	}
-	if (isFullHouse(hand, size)) {
+	else if (isFullHouse(hand, size)) 
 		cout << "Full House";
-		return;
-	}
-	if (isFlush(hand, size)) {
+	else if (isFlush(hand, size)) 
 		cout << "Flush";
-		return;
-	}
+	else if (isStraight(hand, size)) 
+		cout << "Straight";
+	else if (isThreeOfAKind(hand, size)) 
+		cout << "Three of A Kind";
+	else if (isTwoPairs(hand, size)) 
+		cout << "Two Pairs";
+	else if (isPairs(hand, size)) 
+		cout << "Pair";
+	else if (isFlush(hand, size)) 
+		cout << "Flush";
+	else
+		cout << highestCard(hand, size) ; 
+	cout << endl;
 }
 void singlePlayer(int *deck, string faces[FACES], string suits[SUITS]) {
 	int top = 0;

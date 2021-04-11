@@ -15,6 +15,8 @@ using namespace std;
 void shuffleCards(int* deck); 
 void printCardsShuffling(int deck[], string faces[],string suits[]);
 int displayMenu();
+int face(int card);
+int suit(int card);
 bool isFourOfAKind(int* hand, int size);
 bool isFullHouse(int* hand, int size);
 bool isFlush(int* hand, int size);
