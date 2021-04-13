@@ -27,12 +27,18 @@
     <ClCompile Include="mode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="additionalFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ohama.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="mode.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="additionalFunction.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

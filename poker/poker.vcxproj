@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="additionalFunction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ohama.cpp" />
     <ClCompile Include="paranoise.cpp" />
     <ClCompile Include="mode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="additionalFunction.h" />
     <ClInclude Include="ohama.h" />
     <ClInclude Include="mode.h" />
   </ItemGroup>

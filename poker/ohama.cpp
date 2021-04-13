@@ -7,7 +7,7 @@ int suit(int card) {
 }
 int displayMenu() {
 	int mode;
-	cout << endl << endl << endl << "Welcome to Dark Net - New generation of Poker" << endl;
+	cout << endl << endl << endl << "Welcome to Dark Net -  Miracle Generation of Poker" << endl;
 	cout << "Select mode" << endl;
 	cout << "1. Singleplayer" << endl;
 	cout << "2. Multiplayer" << endl;
@@ -16,6 +16,7 @@ int displayMenu() {
 	cout << "0 : Leave " << endl;
 	cout << "Your choice : " << endl;
 	cin >> mode;
+	system("cls"); 
 	return mode;
 }
 void shuffleCards(int* deck) {
@@ -31,7 +32,7 @@ void shuffleCards(int* deck) {
 	}
 	delete[] check;
 }
-void printCardsShuffling(int deck[], string suits[], string faces[]) {
+void printCardsShuffling(int deck[], string faces[] , string suits[]) {
 	for (int i = 0; i < CARDS; i++) {
 		if (i % 4 == 0) {
 			cout << endl;
@@ -41,6 +42,7 @@ void printCardsShuffling(int deck[], string suits[], string faces[]) {
 	}
 }
 int *createHandTest(int *deck, int *a) {
+	return a;
 }
 bool isFourOfAKind(int* hand, int size) {
 	int faceCount[FACES];

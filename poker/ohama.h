@@ -6,12 +6,15 @@
 #include<ctime>
 #include<cstdlib>
 #include<string>
-
 using namespace std; 
-
 #define SUITS 4 
 #define FACES 13
-#define CARDS 52 
+#define CARDS 52
+
+struct handTracer {
+	int add;
+	int val;
+};
 void shuffleCards(int* deck); 
 void printCardsShuffling(int deck[], string faces[],string suits[]);
 int displayMenu();
