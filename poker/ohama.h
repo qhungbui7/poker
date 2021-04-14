@@ -10,6 +10,11 @@ using namespace std;
 #define SUITS 4 
 #define FACES 13
 #define CARDS 52
+#define MAX_TURN 3 
+#define POINT_PER_ROUND 1000 
+#define POINT_PER_DRAW 200
+#define WINNING_POINT 1000 
+
 
 struct handTracer {
 	int add;

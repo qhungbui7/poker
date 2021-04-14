@@ -11,10 +11,11 @@ int displayMenu() {
 	cout << "Select mode" << endl;
 	cout << "1. Singleplayer" << endl;
 	cout << "2. Multiplayer" << endl;
-	cout << "3. Players vs Intelligent Dealer" << endl;
-	cout << "4. Extra mode : Human vs Artificial Intelligent" << endl;
+	cout << "3. \"Dealer simulation\" mode" << endl; 
+	cout << "4. Player vs Dealer" << endl;
+	cout << "5. Extra mode : Human vs Artificial Intelligent" << endl;
 	cout << "0 : Leave " << endl;
-	cout << "Your choice : " << endl;
+	cout << "Your choice : \n>> ";
 	cin >> mode;
 	system("cls"); 
 	return mode;
@@ -25,10 +26,11 @@ void shuffleCards(int* deck) {
 		check[i] = true;
 	for (int i = 0; i < CARDS; i++) {
 		int num;
-		{
-			num = rand() % 52;
-		} while (!check[num]);
+		do {
+			num = rand() % CARDS;
+		} while (!check[num]); 
 		deck[i] = num;
+		check[num] = false; 
 	}
 	delete[] check;
 }
@@ -38,7 +40,6 @@ void printCardsShuffling(int deck[], string faces[] , string suits[]) {
 			cout << endl;
 		}
 		cout << "(" << faces[face(deck[i])] << "," << suits[suit(deck[i])] << ")    ";
-
 	}
 }
 int *createHandTest(int *deck, int *a) {
