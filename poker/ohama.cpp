@@ -129,7 +129,7 @@ bool isTwoPairs(int* hand, int size) {
 	}
 	int count = 0; 
 	for (int i = 0; i < FACES; i++) {
-		if (faceCount[i] == 2)
+		if (faceCount[i] >= 2)
 			count++; 
 	}
 	return count == 2;

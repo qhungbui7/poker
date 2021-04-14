@@ -4,7 +4,8 @@
 #include"mode.h"
 #include"additionalFunction.h"
 #include"utilities.h"
-void dummyBot(int* deck, int s); 
-void insaneBot(int* deck, int s); 
-void turing(int* deck,  int s);
+void bot(int* deck, int s, int level); 
+int drawMoreForDummyBot(int* hand, int* deck, int& top, int size, int& points); 
+int drawMoreForInsaneBot(int* hand, int* deck, int& top, int size, int& points); 
+int drawMoreForTuring(int* hand, int* deck, int& top, int size, int& points); 
 #endif // !_BOT_H_

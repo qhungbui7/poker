@@ -215,16 +215,8 @@ void vsDealer(int* deck) {
 	cout << "Insane bot will draw 3 cards without losing points and choose the best rank\n";
 	cout << "Agressive bot will deliberately daw 0 - 3 cards with statistic and probability analysis then will be trained by machine learning algorithm \n";
 	cout << "Agressive bot's name is Turing, He is trained by Neural Network - implemented from scratch - and some optimization method.\n"; 
-	cout << "Turing can extract information from your hand so you should draw card carefully :) \n";
+	cout << "You and Turing will lose 300 point for each draw but he can extract information from your hand so you should draw card carefully :) \n";
 	cout << "Choose level \n 1 : Dummy bot \n 2 : Insane bot \n 3 : Agressive bot\n>> ";
 	cin >> level; 
-	if (level == 1) {
-		dummyBot(deck, s); 
-	}
-	else if (level == 2) {
-		insaneBot(deck, s); 
-	}
-	else {
-		turing(deck, s);
-	}
+	bot(deck, s, level); 
 }
