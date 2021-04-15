@@ -6,14 +6,14 @@ int* dealingForHand(int *deck, int *top, int size) { // a little bit change in p
 	return hand; 
 }
 void printHand(int *hand, int size, string faces[FACES], string suits[SUITS]) { // a little bit change in parameter for reusing later
-	cout << endl << "Hand : "; 
+	cout << "Hand : "; 
 	for (int i = 0; i < size; i++) {
-		cout << "(" << faces[face(hand[i])] << "," << suits[suit(hand[i])] << ")    ";
+		cout << "(" << faces[face(hand[i])] << "," << suits[suit(hand[i])] << ")\t";
 	}
 	cout << endl;
 }
 void printHandRanking(int* hand, int size) {
-	cout <<endl << "Your hand rankings : "; 
+	cout <<endl << "Hand rankings : "; 
 	if (isStraightFlush(hand, size)) 
 		cout << "Straigt Flush";
 	else if (isFourOfAKind(hand, size)) 
@@ -31,7 +31,7 @@ void printHandRanking(int* hand, int size) {
 	else if (isPairs(hand, size)) 
 		cout << "Pair";
 	else
-		cout << highestCard(hand, size) ; 
+		cout << "High card with " <<faces[highestCard(hand, size) - 1];
 	cout << endl;
 }
 void singlePlayer(int *deck, string faces[FACES], string suits[SUITS]) {
@@ -40,14 +40,17 @@ void singlePlayer(int *deck, string faces[FACES], string suits[SUITS]) {
 	int top = 0;
 	int size = 5; 
 	int *hand = dealingForHand(deck, &top, size);
+	cout << endl <<endl; 
 	printHand(hand, size,  faces, suits); 
 	printHandRanking(hand, size); 
+	cout << endl;
+	system("pause");
 	delete[] hand; 
 }
 int** dealingForHands(int *deck, int n, int &top,int size){
 	int** hands = new int* [n];
 	for (int i = 0; i < n; i++) {
-		hands[i] = new int[5];
+		hands[i] = new int[8];
 	}
 	for (int i = 0 ; i < n ; i++)
 		for (int j = 0; j < 5; j++) {
@@ -119,6 +122,7 @@ handTracer* rankingHands(int** hands, int n, string faces[FACES], string suits[S
 	}
 	for (int i = 0; i < n; i++) {
 		cout << "Player " <<i<<" : "; 
+		printHandRanking(hands[i], 5); 
 		printHand(hands[i], 5, faces, suits);
 		cout << endl;
 	}
@@ -181,9 +185,11 @@ void multiPlayer(int* deck, string faces[FACES], string suits[SUITS]) {
 		for (int i = 0; i < n; i++)
 			delete[] hands[i];
 		delete[] hands;
+		system("pause");
 	}
 	int *point = evaluateHand(s, rank, n);
 	delete[] point; 
+	system("pause");
 }
 void dealerSimulation(int* deck, string faces[FACES], string suits[SUITS]) {
 	shuffleCards(deck);
@@ -202,20 +208,19 @@ void dealerSimulation(int* deck, string faces[FACES], string suits[SUITS]) {
 		printHand(hand, size, faces, suits);
 		printHandRanking(hand, size);
 	}
+	system("pause");
 	delete[] hand;
 }
 void vsDealer(int* deck) {
 	int s, level, top = 0; 
-	cout << "How many rounds do you want to play ? \n>> ";
+	cout << "How many rounds do you want to play ? (maximum 20 rounds) \n>> ";
 	cin >> s;
 	int dealerPoint = s * POINT_PER_ROUND, playerPoint = s * POINT_PER_ROUND;
 	cout << "In this mode, dealer and you start with " << playerPoint << " points" <<endl;
 	cout << "You and dealer can draw more 0 - 3 cards, for each card is drawed, the owner of it lose 200 points \n";
 	cout << "Dummy bot will randomly draw 0 - 3 cards and replace with random card in it's hand\n"; 
 	cout << "Insane bot will draw 3 cards without losing points and choose the best rank\n";
-	cout << "Agressive bot will deliberately daw 0 - 3 cards with statistic and probability analysis then will be trained by machine learning algorithm \n";
-	cout << "Agressive bot's name is Turing, He is trained by Neural Network - implemented from scratch - and some optimization method.\n"; 
-	cout << "You and Turing will lose 300 point for each draw but he can extract information from your hand so you should draw card carefully :) \n";
+	cout << "Agressive bot will draw 3 cards without losing points and choose the best rank and you can't draw more card\n";
 	cout << "Choose level \n 1 : Dummy bot \n 2 : Insane bot \n 3 : Agressive bot\n>> ";
 	cin >> level; 
 	bot(deck, s, level); 

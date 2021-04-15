@@ -7,13 +7,15 @@ int suit(int card) {
 }
 int displayMenu() {
 	int mode;
-	cout << endl << endl << endl << "Welcome to Dark Net -  Miracle Generation of Poker" << endl;
+	system("color 0B");
+	system("cls"); 
+	cout << "Welcome to Miracle Generation of Poker" << endl;
 	cout << "Select mode" << endl;
 	cout << "1. Singleplayer" << endl;
 	cout << "2. Multiplayer" << endl;
 	cout << "3. \"Dealer simulation\" mode" << endl; 
 	cout << "4. Player vs Dealer" << endl;
-	cout << "5. Extra mode : Human vs Artificial Intelligent" << endl;
+	cout << "5. Player vs AI " << endl;
 	cout << "0 : Leave " << endl;
 	cout << "Your choice : \n>> ";
 	cin >> mode;
@@ -35,11 +37,12 @@ void shuffleCards(int* deck) {
 	delete[] check;
 }
 void printCardsShuffling(int deck[], string faces[] , string suits[]) {
+	cout << "Deck :"; 
 	for (int i = 0; i < CARDS; i++) {
 		if (i % 4 == 0) {
 			cout << endl;
 		}
-		cout << "(" << faces[face(deck[i])] << "," << suits[suit(deck[i])] << ")    ";
+		cout << "(" << faces[face(deck[i])] << "," << suits[suit(deck[i])] << ")\t";
 	}
 }
 int *createHandTest(int *deck, int *a) {
@@ -132,7 +135,7 @@ bool isTwoPairs(int* hand, int size) {
 		if (faceCount[i] >= 2)
 			count++; 
 	}
-	return count == 2;
+	return count >= 2;
 }
 bool isPairs(int* hand, int size) {
 	int faceCount[FACES];

@@ -1,6 +1,6 @@
 #include"bot.h"
-int drawMoreForPlayer(int* hand, int* deck, int& top, int size, int &points) {
-	int cmd, turnp = 3, stt = getStatusOfHand(hand, size);
+int drawMoreForPlayer(int* hand, int* deck, int& top, int size, int &points ,int turnp) {
+	int cmd, stt = getStatusOfHand(hand, size);
 	printHand(hand, size, faces, suits);
 	outHandRanking("Player", stt);
 	while (turnp > 0) {
@@ -28,14 +28,20 @@ void bot(int* deck, int s, int level) {
 		shuffleCards(deck);
 		// printCardsShuffling(deck, faces, suits); 
 		int** hand = dealingForHands(deck, 2, top, 5);
-		int sttP = drawMoreForPlayer(hand[0], deck, top, size, pointsP);
+		int sttP = 0;
 		int sttB = 0 ;
-		if (level == 1 )
+		if (level == 1) {
+			sttP = drawMoreForPlayer(hand[0], deck, top, size, pointsP, 3);
 			sttB = drawMoreForDummyBot(hand[1], deck, top, size, pointsS);
-		else if (level == 2)
+		}
+		else if (level == 2) {
+			sttP = drawMoreForPlayer(hand[0], deck, top, size, pointsP, 3);
 			sttB = drawMoreForInsaneBot(hand[1], deck, top, size, pointsS);
-		else if (level == 3)
-			sttB = drawMoreForTuring(hand[1], deck, top, size, pointsS); 
+		}
+		else if (level == 3) {
+			sttP = drawMoreForPlayer(hand[0], deck, top, size, pointsP, 0); 
+			sttB = drawMoreForAgressiveBot(hand[1], deck, top, size, pointsS);
+		}
 		if (sttP > sttB){
 			pointsP += WINNING_POINT; 
 		}
@@ -48,10 +54,14 @@ void bot(int* deck, int s, int level) {
 		}
 		cout << "\nBy now Player has " << pointsP <<" points and Dealer has "<< pointsS <<" points\n";
 		system("pause");
+		for (int i = 0; i < 2; i++)
+			delete[] hand[i];
+		delete[] hand;
 	}
 	if (pointsP > pointsS) cout << "Player win with " << pointsP << " points " << endl;
-	else if (pointsP < pointsS)cout << "Dealer win with " << pointsS << " points " << endl;
+	else if (pointsP < pointsS) cout << "Dealer win with " << pointsS << " points " << endl;
 	else cout << "Draw match, Player and Dealer have same points - " << pointsP << " points " << endl; 
+	system("pause");
 }
 int drawMoreForDummyBot(int* hand, int* deck, int& top, int size, int& points) {
 	int d = getStatusOfHand(hand, size), turnd = rand() % 4, num;
@@ -71,8 +81,23 @@ int drawMoreForDummyBot(int* hand, int* deck, int& top, int size, int& points) {
 	return stt;
 }
 int drawMoreForInsaneBot(int* hand, int* deck, int& top, int size, int& points) {
-	int d = getStatusOfHand(hand, size), turnd = 3, num;
-	cout << "\nDealer : \n";
+	int d = getStatusOfHand(hand, size), turnd = 3;
+	cout << "\nDealer's \n";
+	printHand(hand, size, faces, suits);
+	outHandRanking("Dealer", getStatusOfHand(hand, size));
+	for (int i = 0; i < turnd; i++) {
+		hand[size++] = deck[top++];
+	}
+	cout << endl << "Dealer draws " << turnd << " cards and gets new hand : ";
+	printHand(hand, size, faces, suits);
+	int stt = getStatusOfHand(hand, size);
+	outHandRanking("Dealer", stt);
+
+	return stt;
+}
+int drawMoreForAgressiveBot(int* hand, int* deck, int& top, int size, int& points) {
+	int d = getStatusOfHand(hand, size), turnd = 3;
+	cout << "\nDealer's \n";
 	printHand(hand, size, faces, suits);
 	outHandRanking("Dealer", getStatusOfHand(hand, size));
 	for (int i = 0; i < turnd; i++) {
@@ -86,8 +111,8 @@ int drawMoreForInsaneBot(int* hand, int* deck, int& top, int size, int& points) 
 	return stt;
 }
 int drawMoreForTuring(int* hand, int* deck, int& top, int size, int& points) {
-	int d = getStatusOfHand(hand, size), turnd = 3, num;
-	cout << "\nDealer : \n";
+	int d = getStatusOfHand(hand, size), turnd = 3;
+	cout << "\nDealer's \n";
 	printHand(hand, size, faces, suits);
 	outHandRanking("Dealer", getStatusOfHand(hand, size));
 	for (int i = 0; i < turnd; i++) {
