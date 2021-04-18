@@ -160,10 +160,13 @@ int *evaluateHand(int s, handTracer **rank, int n) {
 void multiPlayer(int* deck, string faces[FACES], string suits[SUITS]) {
 	int n, s, top = 0, size = 5;
 	handTracer** rank = new handTracer * [size]; 
-	cout << "Enter number of players ( 5 players is maximum since number of cards is limit) : \n>> "; 
-	cin >> n; 
-	cout << "Enter number of rounds you want to play  : \n>> "; 
-	cin >> s;
+	do {
+		system("cls");
+		cout << "Enter number of players ( 10 players is maximum since number of cards is limit) : \n>> ";
+		cin >> n;
+		cout << "Enter number of rounds you want to play  : \n>> ";
+		cin >> s;
+	} while (s < 0 || n > 10 || n < 0);
 
 	for (int k = 0; k < s; k++) {
 		cout << "-------------------------------------------------------------------------------------" << endl; 
@@ -213,15 +216,45 @@ void dealerSimulation(int* deck, string faces[FACES], string suits[SUITS]) {
 }
 void vsDealer(int* deck) {
 	int s, level, top = 0; 
-	cout << "How many rounds do you want to play ? (maximum 20 rounds) \n>> ";
-	cin >> s;
+	do {
+		cout << "How many rounds do you want to play ? \n>> ";
+		cin >> s;
+	} while (s < 0); 
 	int dealerPoint = s * POINT_PER_ROUND, playerPoint = s * POINT_PER_ROUND;
 	cout << "In this mode, dealer and you start with " << playerPoint << " points" <<endl;
 	cout << "You and dealer can draw more 0 - 3 cards, for each card is drawed, the owner of it lose 200 points \n";
 	cout << "Dummy bot will randomly draw 0 - 3 cards and replace with random card in it's hand\n"; 
-	cout << "Insane bot will draw 3 cards without losing points and choose the best rank\n";
-	cout << "Agressive bot will draw 3 cards without losing points and choose the best rank and you can't draw more card\n";
-	cout << "Choose level \n 1 : Dummy bot \n 2 : Insane bot \n 3 : Agressive bot\n>> ";
+	cout << "Insane bot will always draw 3 cards without losing points and choose the best rank\n";
+	cout << "Agressive bot will always draw 3 cards without losing points then choose the best rank and you can't draw more card\n";
+	cout << "Choose level (1 - 3) : \n 1 : Dummy bot \n 2 : Insane bot \n 3 : Agressive bot\n>> ";
 	cin >> level; 
 	bot(deck, s, level); 
+}
+void experiment(int *deck) {
+	int cmd, *hand ;
+	int *a = new int[5]; 
+	shuffleCards(deck); 
+	do {
+		cout << "Sandbox, select mode ( 0 - 3 ) : \n";
+		cout << "1. Shuffle the deck\n";
+		cout << "2. Display the deck\n";
+		cout << "3. Create a hand test then display it and it's rank\n";
+		cout << "0: Out the sandbox\n>> ";
+		cin >> cmd;
+		if (cmd == 1) {
+			shuffleCards(deck);
+			cout << "Re-shuffle the deck sucessfully  !\n";
+		}
+		else if (cmd == 2) {
+			printCardsShuffling(deck, faces, suits);
+		}
+		else if (cmd == 3) {
+			hand = createHandTest(deck, a,faces,suits);		
+			printHand(hand,5, faces,suits);
+			printHandRanking(hand, 5);
+		}
+		cout << endl;
+		system("pause");
+		system("cls"); 
+	} while (cmd); 
 }

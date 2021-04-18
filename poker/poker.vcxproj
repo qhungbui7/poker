@@ -143,7 +143,6 @@
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ohama.cpp" />
-    <ClCompile Include="paranoise.cpp" />
     <ClCompile Include="mode.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>

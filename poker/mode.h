@@ -11,4 +11,5 @@ int** dealingForHands(int* deck, int n, int& top, int size);
 int getStatusOfHand(int* hand, int size); 
 void outHandRanking(string name, int status); 
 void printHand(int* hand, int size, string faces[FACES], string suits[SUITS]);
+void experiment(int* deck); 
 #endif 

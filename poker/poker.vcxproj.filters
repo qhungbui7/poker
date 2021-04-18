@@ -21,9 +21,6 @@
     <ClCompile Include="ohama.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="paranoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

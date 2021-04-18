@@ -34,4 +34,5 @@ bool isThreeOfAKind(int* hand, int size);
 bool isTwoPairs(int* hand, int size);
 bool isPairs(int* hand, int size);
 int highestCard(int* hand, int size); 
+int* createHandTest(int* deck, int a[], string faces[], string suits[]);
 #endif // !_OHAMA_H_

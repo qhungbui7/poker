@@ -4,7 +4,7 @@
 
 int main() {
 	srand(time(NULL)); 
-	int deck[CARDS]; 
+	int* deck = new int[CARDS]; 
 	string faces[FACES] = { "2", "3", "4", "5" ,"6" , "7" ,"8", "9", "10", "J", "Q", "K", "A" };
 	string suits[SUITS] = { "Hearts", "Diamonds", "Clubs", "Spades" };
 	int mode = 1; 
@@ -22,7 +22,11 @@ int main() {
 		else if (mode == 4) {
 			vsDealer(deck) ; 
 		} 
+		else if (mode == 5) {
+			experiment(deck); 
+		}
 		cout << endl << endl; 
 	}
+	delete[] deck;
 	return 0; 
 }
