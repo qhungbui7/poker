@@ -148,7 +148,7 @@ int factory(int a) {
 	return mul; 
 }
 bool isStraightFlush(int* hand, int size) { 
-	int straightSize = 5, cnt = 0, fac = 1, per[5] ;
+	int straightSize = 5, cnt = 0, fac = 1, *per = new int[size] ;
 	int numPermutation = factory(size) / factory(size - straightSize); 
 	int maxPermutation = factory(straightSize + 3) / factory((straightSize + 3) - straightSize);
 	bool check[5], res = false ;
@@ -162,7 +162,10 @@ bool isStraightFlush(int* hand, int size) {
 			if (isStraight(sav[i], straightSize) && isFlush(sav[i], straightSize))
 				res =  true;
 	}
-
+	for (int i = 0; i < maxPermutation; i++)
+		delete[] sav[i];
+	delete[] sav;
+	delete[] per; 
 
 	return res; 
 
